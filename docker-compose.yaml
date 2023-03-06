@@ -1,13 +1,15 @@
-version: '3' 
-
-services: 
-  baota: 
-    image: pch18/baota 
-    container_name: baota 
-    ports: 
-      - "80:80" 
-      - "443:443" 
-      - "8888:8888" 
-      - "888:888" 
-    privileged: true 
-    restart: always 
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=mydb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: --bind-address=0.0.0.0
+volumes:
+  mysql-data:
