@@ -10,10 +10,4 @@ services:
       - "8888:8888" 
       - "888:888" 
     privileged: true 
-    shm_size: 1g 
     restart: always 
-    volumes: 
-      - baota_data:/www/wwwroot 
-
-volumes: 
-  baota_data:
