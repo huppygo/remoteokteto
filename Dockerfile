@@ -6,7 +6,7 @@ RUN yum install -y wget && \
     wget -O /etc/yum.repos.d/epel.repo http://mirrors.cloud.tencent.com/repo/epel-7.repo && \
     yum makecache
 # 导入 MySQL 公钥
-RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql
+RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 # 安装必要的软件包和依赖
 RUN yum -y update && \
     yum -y install perl libaio numactl net-tools vim
