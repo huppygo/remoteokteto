@@ -15,18 +15,15 @@ RUN yum -y update && \
     yum -y install perl libaio numactl net-tools vim
 
 # 下载 MySQL 5.7 的 Yum Repository 配置文件
-RUN wget https://repo.mysql.com/mysql57-community-release-el7-11.noarch.rpm && \
-    rpm -ivh mysql57-community-release-el7-11.noarch.rpm && \
-    yum -y update
+RUN wget https://repo.mysql.com/yum/mysql-5.7-community/docker/x86_64/mysql-community-server-minimal-5.7.35-1.el7.x86_64.rpm
 
 # 安装 MySQL 5.7
-RUN yum -y install mysql-community-server-5.7.35
+RUN rpm -ivh mysql-community-server-minimal-5.7.35-1.el7.x86_64.rpm && \
+    yum -y update && \
+    yum -y install mysql-community-server
 
 # 配置 MySQL
-RUN mkdir -p /var/run/mysqld && \
-    chown mysql:mysql /var/run/mysqld && \
-    chown -R mysql:mysql /var/lib/mysql && \
-    chmod 777 /var/lib/mysql && \
+RUN chown -R mysql:mysql /var/lib/mysql && \
     echo "[mysqld]\nbind-address=0.0.0.0\n" >> /etc/my.cnf && \
     echo "skip-host-cache\nskip-name-resolve\n" >> /etc/my.cnf && \
     echo "default-storage-engine = innodb\ninnodb_file_per_table = 1\ninnodb_flush_log_at_trx_commit = 2\nsync_binlog = 0\n" >> /etc/my.cnf && \
@@ -35,4 +32,4 @@ RUN mkdir -p /var/run/mysqld && \
     echo "skip-grant-tables\n" >> /etc/my.cnf
 
 # 设置启动命令
-CMD ["mysqld_safe"]
+CMD ["mysqld"]
