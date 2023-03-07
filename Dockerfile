@@ -12,10 +12,11 @@ RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 
 # 安装必要的软件包和依赖
 RUN yum -y update && \
-    yum -y install perl libaio numactl net-tools vim mysql-community-server
+    yum -y install perl libaio numactl net-tools vim && \
+    yum -y install mysql-community-server
 
 # 配置 MySQL
-RUN mkdir -p /var/run/mysqld && \
+RUN mkdir /var/run/mysqld && \
     chown mysql:mysql /var/run/mysqld && \
     chown -R mysql:mysql /var/lib/mysql && \
     chmod 777 /var/lib/mysql && \
