@@ -1,7 +1,7 @@
 # 使用官方 CentOS 7 基础镜像
 FROM centos:7
 
-# 设置阿里云镜像源和 EPEL 源
+# 设置腾讯云镜像源和 EPEL 源
 RUN yum install -y wget && \
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.cloud.tencent.com/repo/centos7_base.repo && \
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.cloud.tencent.com/repo/epel-7.repo
