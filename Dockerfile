@@ -15,12 +15,12 @@ RUN yum -y update && \
     yum -y install perl libaio numactl net-tools vim
 
 # 下载 MySQL 5.7 的 Yum Repository 配置文件
-RUN wget https://repo.mysql.com/yum/mysql-5.7-community/docker/x86_64/mysql-community-server-minimal-5.7.35-1.el7.x86_64.rpm
+RUN wget https://repo.mysql.com/mysql57-community-release-el7-11.noarch.rpm && \
+    rpm -ivh mysql57-community-release-el7-11.noarch.rpm && \
+    yum -y update
 
 # 安装 MySQL 5.7
-RUN rpm -ivh mysql-community-server-minimal-5.7.35-1.el7.x86_64.rpm && \
-    yum -y update && \
-    yum -y install mysql-community-server
+RUN yum -y install mysql-community-server-5.7.35
 
 # 配置 MySQL
 RUN mkdir /var/run/mysqld && \
