@@ -23,7 +23,7 @@ RUN wget https://repo.mysql.com/mysql57-community-release-el7-11.noarch.rpm && \
 RUN yum -y install mysql-community-server-5.7.35
 
 # 配置 MySQL
-RUN mkdir /var/run/mysqld && \
+RUN mkdir -p /var/run/mysqld && \
     chown mysql:mysql /var/run/mysqld && \
     chown -R mysql:mysql /var/lib/mysql && \
     chmod 777 /var/lib/mysql && \
