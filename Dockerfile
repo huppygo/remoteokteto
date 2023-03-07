@@ -1,14 +1,18 @@
-# 使用官方 CentOS 7 基础镜像
-FROM centos:7
+# 使用阿里云镜像源的 CentOS 7 基础镜像
+FROM registry.cn-hangzhou.aliyuncs.com/library/centos:7
+
+# 设置阿里云镜像源和 EPEL 源
+RUN yum install -y wget && \
+    wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo && \
+    wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo && \
+    yum makecache
+
+# 导入 MySQL 公钥
+RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql
 
 # 安装必要的软件包和依赖
 RUN yum -y update && \
-    yum -y install wget && \
-    yum -y install perl && \
-    yum -y install libaio && \
-    yum -y install numactl && \
-    yum -y install net-tools && \
-    yum -y install vim
+    yum -y install perl libaio numactl net-tools vim
 
 # 下载 MySQL 5.7 的 Yum Repository 配置文件
 RUN wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
