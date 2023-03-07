@@ -1,5 +1,5 @@
-# 使用阿里云镜像源的 CentOS 7 基础镜像
-FROM registry.cn-hangzhou.aliyuncs.com/library/centos:7
+# 使用官方 CentOS 7 基础镜像
+FROM centos:7
 
 # 设置阿里云镜像源和 EPEL 源
 RUN yum install -y wget && \
